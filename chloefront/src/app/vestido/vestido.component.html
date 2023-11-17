@@ -1,0 +1,212 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="tu-archivo-javascript-o-typescript.js"></script>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" style="color: white;">Administrador de Vestidos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" (click)="onOpenVestidoModal('add')">Nuevo Vestido<span class="sr-only"></span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input type="search" (ngModelChange)="searchVestidos(key.value)" #key="ngModel" ngModel name="key"
+                id="searchName" class="form-control mr-sm-2" placeholder="Buscar Vestidos..." required>
+        </form>
+    </div>
+</nav>
+
+<!-- Contenedor Principal -->
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor="let vestido of vestidosList" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img [src]="vestido?.foto" alt="" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5>{{vestido?.nombre}}</h5>
+                        <p class="m-0">{{vestido?.descripcion}}</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-tags float-right"></i>Codigo : {{vestido?.codigo}}</li>
+                    <li class="list-group-item"><i class="fa fa-tags float-right"></i>Color : {{vestido?.color}}</li>
+                    <li class="list-group-item"><i class="fa fa-tags float-right"></i>Talle : {{vestido?.talle}}</li>
+                    <li class="list-group-item"><i class="fa fa-tags float-right"></i>Unidades : {{vestido?.unidades}}</li>
+                    <li class="list-group-item"><i class="fa fa-tags float-right"></i>Fecha de compra : {{vestido?.fechacompra}}</li>
+                    <li class="list-group-item"><i class="fa fa-money float-right"></i>Precio : {{vestido?.precio_id |
+                        currency:'USD':'symbol':'1.2-2'}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenVestidoModal('edit', vestido)" class="btn btn-primary tooltips"
+                            data-placement="top" data-original-title="Editar"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenVestidoModal('delete', vestido)" class="btn btn-secondary tooltips"
+                            data-placement="top" data-original-title="Borrar"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Vestido -->
+    <div class="modal fade" id="addVestidoModal" tabindex="-1" role="dialog" aria-labelledby="addVestidoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addVestidoModalLabel">Nuevo Vestido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form #addForm="ngForm" (ngSubmit)="onAddVestido(addForm)">
+                        <div class="form-group">
+                            <label for="codigo">Codigo</label>
+                            <input type="text" ngModel name="codigo" class="form-control" id="codigo"
+                                placeholder="Codigo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" ngModel name="nombre" class="form-control" id="nombre"
+                                placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" ngModel name="color" class="form-control" id="color" placeholder="Color"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="talle">Talle</label>
+                            <input type="text" ngModel name="talle" class="form-control" id="talle" placeholder="Talle"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="unidades">Unidades</label>
+                            <input type="text" ngModel name="unidades" class="form-control" id="unidades"
+                                placeholder="Unidades" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechacompra">Fechacompra</label>
+                            <input type="text" ngModel name="fechacompra" class="form-control" id="fechacompra"
+                                placeholder="Fechacompra" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" ngModel name="descripcion" class="form-control" id="descripcion"
+                                placeholder="Descripción" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="precio_id">Precio</label>
+                            <input type="number" ngModel name="precio_id" class="form-control" id="precio_id"
+                                placeholder="Precio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">URL de Imagen</label>
+                            <input type="text" ngModel name="foto" class="form-control" id="foto"
+                                placeholder="URL de Imagen" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="add-vestido-form" class="btn btn-secondary"
+                                data-dismiss="modal">Cerrar</button>
+                            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar
+                                Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Editar Vestido -->
+    <div class="modal fade" id="updateVestidoModal" tabindex="-1" role="dialog"
+        aria-labelledby="updateVestidoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateVestidoModalLabel">Editar Vestido {{ editVestido ?
+                        editVestido.nombre : 'Nombre no disponible' }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" ngModel name="nombre" class="form-control" id="nombre"
+                                placeholder="Nombre" value="{{ editVestido ? editVestido.nombre : '' }}">
+                        </div>
+                        <input type="hidden" ngModel name="id" class="form-control" id="id" placeholder="Id">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" ngModel name="descripcion" class="form-control" id="descripcion"
+                                placeholder="Descripción" value="{{ editVestido ? editVestido.descripcion : '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="codigo">Categoría</label>
+                            <input type="text" ngModel name="codigo" class="form-control" id="codigo"
+                                placeholder="Categoría" value="{{ editVestido ? editVestido.codigo : '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="precio_id">Precio</label>
+
+                            <input type="number" ngModel name="precio_id" class="form-control" id="precio_id"
+                                placeholder="Precio" value="{{ editVestido ? editVestido.precio_id : '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">URL de Imagen</label>
+                            <input type="text" ngModel name="foto" class="form-control" id="foto"
+                                placeholder="URL de Imagen" value="{{ editVestido ? editVestido.foto : '' }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+                            <button (click)="onUpdateVestido(editForm.value)" data-dismiss="modal"
+                                class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Vestido -->
+    <div class="modal fade" id="deleteVestidoModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteVestidoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteVestidoModalLabel">Borrar Vestido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro de borrar el vestido {{deleteVestido.nombre}}?</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button *ngIf="deleteVestido.id !== undefined" (click)="onDeleteVestido(deleteVestido.id)"
+                            class="btn btn-danger" data-dismiss="modal">Sí</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación si no hay vestidos -->
+    <div *ngIf="vestidosList?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">¡NO HAY VESTIDOS!</h4>
+            <p>Vestidos no encontrados.</p>
+        </div>
+    </div>
+</div>

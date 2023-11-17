@@ -1,0 +1,276 @@
+.header {
+  width: 98%;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Negro con transparencia del 50% */
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px;
+  position: fixed;
+  /* Fija el header en la parte superior */
+  top: 0;
+  /* Asegura que esté en la parte superior */
+  z-index: 1000;
+  /* Para asegurar que esté por encima de otros elementos */
+  margin: 0px;
+}
+
+img {
+  width: 40px;
+}
+
+.imagen-estilo {
+  width: 100%;
+  height: 50%;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+}
+
+
+.carrousel {
+  background-image: url('../../assets/fondo administracion3.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(112, 25, 25);
+  text-align: center;
+  padding: 0;
+  /* Mantiene el espacio superior e inferior */
+  margin: 0px;
+}
+
+.imagen-carrousel {
+  width: 400px;
+  height: 500px;
+}
+
+.carrousel h1 {
+  margin-bottom: 20px;
+  /* Añade espacio entre "Foto" y el carrusel */
+}
+
+.carrousel .ngb-carousel {
+  width: 100%;
+  /* Ajusta el ancho del carrusel al 100% del contenedor */
+  margin: 0;
+}
+
+.carrousel .ngb-carousel img {
+  width: 100%;
+  /* Ajusta el ancho de las imágenes al 100% del carrusel */
+  height: 100%;
+  /* Ajusta la altura automáticamente para mantener la proporción */
+}
+
+
+
+.contacto {
+  width: 100%;
+  height: 250px;
+  background-image: url('../../assets/fondo administracion2.jpeg');
+  background-size: cover;
+  /* Ajusta la imagen para cubrir todo el fondo */
+  background-repeat: no-repeat;
+  /* Evita la repetición de la imagen */
+  background-position: center;
+  /* Centra la imagen en el elemento .historia */
+  color: goldenrod;
+  /* Cambia el color del texto para que sea legible en el fondo */
+  text-align: center;
+  padding: 30px;
+  /* Añade espacio interior para el contenido */
+  margin: auto;
+  /* Centra el elemento horizontalmente */
+}
+.contacto p {
+  font-size: 18px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-weight: bold; /* Hace que la fuente sea negrita */
+  color: goldenrod
+}
+.contacto a {
+  color: goldenrod; /* Cambia el color de los enlaces a dorado */
+}
+.image-container {
+  position: relative;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  /* Adjust the width as needed */
+}
+
+.transparent-button {
+  background: transparent;
+  border: none;
+  color: white;
+  /* Text color of the buttons */
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.transparent-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Transparent black on hover */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.conocenos-section {
+  position: relative;
+  background-image: url('../../assets/conocenos.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(18, 58, 18);
+  text-align: center;
+  padding: 400;
+  margin: 0;
+}
+
+
+.conocenos-section h1 {
+  font-size: 30px; /* Increase the font size for the h1 */
+  font-weight: bold; /* Make the h1 text bold */
+}
+
+.conocenos-section p {
+  font-size: 30px; /* Increase the font size for paragraphs */
+  
+ 
+font-weight: bold; /* Make the paragraph text bold */
+}
+.conocenos-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  /* Adjust the opacity (the last value) as needed */
+}
+
+.conocenos-section h1 {
+  font-size: 24px;
+}
+
+.conocenos-section p {
+  font-size: 16px;
+}
+
+.conocenos-section img {
+
+
+  max-width: 30%;
+  /* Ensure the images are responsive */
+  height: auto;
+  /* Maintain aspect ratio */
+
+
+  width: 100%;
+  /* Set the width to 100% to make the images larger */
+}
+a {
+  color: white; /* Set the color to white */
+  text-decoration: none; /* Remove underline and other decorations */
+}
+
+
+.btn-neon {
+  position: relative;
+  bottom: 0;
+  display: inline-block;
+  justify-content: space-between;
+  padding: 15px 38px;
+  color: #fff;
+  letter-spacing: 4px; /* Ajusta el valor según sea necesario */
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.btn-neon:hover {
+  background: goldenrod;
+  box-shadow: 0 0 10px goldenrod, 0 0 40px goldenrod, 0 0 80px goldenrod;
+  transition-delay: 1s;
+}
+
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+.btn-neon .span1 {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,goldenrod);
+}
+.btn-neon:hover .span1 {
+  left: 100%;
+  transition: 1s;
+  transition-delay: 0.25s;
+}
+
+.btn-neon .span3 {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, goldenrod);
+}
+.btn-neon:hover .span3 {
+  right: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
+}
+
+.btn-neon .span2 {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, goldenrod);
+}
+.btn-neon:hover .span2 {
+  top: 100%;
+  transition: 1s;
+  transition-delay: 0.50s;
+}
+
+.btn-neon .span4 {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, goldenrod);
+}
+.btn-neon:hover .span4 {
+  bottom: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
+}

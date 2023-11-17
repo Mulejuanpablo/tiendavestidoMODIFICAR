@@ -1,0 +1,150 @@
+.group {
+    position: relative;
+  }
+  body {
+    background-image: url('../../assets/conocenos.jpeg');
+    background-size: 50%;
+    margin: 0; /* Elimina el margen predeterminado del body */
+    min-height: 100vh; /* Establece la altura mínima al 100% de la ventana */
+    display: flex;
+    flex-direction: column;
+}
+  
+  .form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1px solid rgb(26, 61, 42);
+    padding: 120px 40px;
+    padding-top: 60px;
+    padding-bottom: 90px;
+    padding-right: 40px;
+    padding-left: 40px;
+    background-image: url('../../assets/login fondo.jpg');
+    background-size: cover;
+    border-radius: 20px;
+    position: relative;
+  }
+  
+  .form p {
+    padding-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: .5px;
+    color: rgb(238, 119, 169);
+    text-shadow: 0 0 1px black; 
+    
+  }
+ 
+  .container-1 {
+    padding-top: 30px;
+  }
+  
+  .main-input {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 185px;
+    border: none;
+    border-bottom: 1px solid rgb(238, 14, 227);
+    background: transparent;
+    color: #ffffff;
+  }
+  
+  .main-input:focus {
+    outline: none;
+    border-bottom-color: #ff1cd9;
+  }
+  
+  .lebal-email {
+    color: rgb(238, 119, 169);
+    font-size: 18px;
+    font-weight: normal;
+    font-weight: bold;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    text-shadow: 0 0 1px black; 
+  }
+  
+  .main-input:focus ~ .lebal-email,
+  .main-input:valid ~ .lebal-email {
+    top: -20px;
+    font-size: 14px;
+    color: #ff1cd9;
+  }
+  
+  .highlight-span {
+    position: absolute;
+    height: 60%;
+    width: 0px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  .main-input:focus ~ .highlight-span {
+    -webkit-animation: input-focus 0.3s ease;
+    animation: input-focus 0.3s ease;
+  }
+  
+  @keyframes input-focus {
+    from {
+      background: rgb(238, 119, 169);
+    }
+  
+    to {
+      width: 185px;
+    }
+  }
+  
+  .submit {
+    margin-top: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgb(238, 119, 169); /* Cambia este color al dorado que prefieras */
+  }
+
+
+
+
+
+  .barra-inicio {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-image: url('../../assets/login fondo.jpg');
+    background-size: cover;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .volver-inicio {
+    color: rgb(12, 12, 12);
+    text-decoration: none;
+    background-color: rgb(238, 119, 169);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .volver-inicio:hover {
+    background-color: #ff1cd9;;
+  }
+  

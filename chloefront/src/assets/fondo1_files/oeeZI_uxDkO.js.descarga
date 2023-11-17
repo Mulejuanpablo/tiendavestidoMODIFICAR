@@ -1,0 +1,4 @@
+;/*FB_PKG_DELIM*/
+
+__d("LSCheckAuthoritativeMessageExists",[],(function(a,b,c,d,e,f){function a(){var a=arguments,b=a[a.length-1];b.n;var c=[],d=[];return b.seq([function(e){return b.seq([function(d){return b.ftr(b.db.table(12).fetch([[[a[0]]]]),function(c){return b.i64.eq(c.threadKey,a[0])&&c.offlineThreadingId===a[1]&&b.i64.eq(c.authorityLevel,b.i64.cast([0,80]))}).next().then(function(a,b){b=a.done;a=a.value;return b?c[0]=!1:(a.item,c[0]=!0)})},function(a){return d[0]=c[0]}])},function(a){return b.resolve(d)}])}b=a;f["default"]=b}),66);
+__d("LSUpdateParticipantLastMessageSendTimestamp",[],(function(a,b,c,d,e,f){function a(){var a=arguments,b=a[a.length-1];b.n;var c=[];return b.resolve(c)}b=a;f["default"]=b}),66);

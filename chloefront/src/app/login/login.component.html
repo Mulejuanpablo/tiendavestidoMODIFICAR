@@ -1,0 +1,22 @@
+<body>
+  <div class="barra-inicio">
+    <a href="#inicio" class="volver-inicio">Volver al inicio</a>
+  </div>
+
+  <form class="form" (ngSubmit)="login()">
+    <p>Administracion</p>
+    <div class="group">
+      <input [(ngModel)]="nombreusuario" name="nombreusuario" required class="main-input" type="text">
+      <span class="highlight-span"></span>
+      <label class="lebal-email">Usuario</label>
+    </div>
+    <div class="container-1">
+      <div class="group">
+        <input [(ngModel)]="clave" name="clave" required class="main-input" type="password">
+        <span class="highlight-span"></span>
+        <label class="lebal-email">Contraseña</label>
+      </div>
+    </div>
+    <button type="submit" class="submit" >Ingresar</button>
+  </form>
+</body>
