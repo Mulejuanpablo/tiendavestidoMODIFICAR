@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Authresponse {
-
-    String respuesta;
-
-    
+    private boolean success;
+    private String message;
+    // Otros campos según sea necesario
 }

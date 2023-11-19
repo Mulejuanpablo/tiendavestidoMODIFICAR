@@ -1,3 +1,4 @@
 export class AuthResponse {
-    respuesta: string = "inicio de sesion exitosa";
+  success: boolean;
+  message: string;
 }

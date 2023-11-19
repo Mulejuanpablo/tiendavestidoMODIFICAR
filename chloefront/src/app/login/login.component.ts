@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Login } from './login';
+import { AuthResponse } from './AuthResponse';
 
 @Component({
   selector: 'app-loguin',
@@ -27,30 +28,28 @@ export class LoginComponent {
   }
 
   login(): void {
- 
     this.usuario = new Login(this.nombreusuario, this.clave);
     console.log('Credenciales enviadas:', this.usuario);
 
     this.authService.login(this.usuario).subscribe(
-      (response) => {
-        const veri = "inicio de sesion exitosa";
-        
-        console.log('Respuesta del servidor:', response);
-        if(response == veri){
-            this.iradministracion();
-            alert(response);
+        (response: AuthResponse) => {
+            console.log('Respuesta del servidor:', response);
+
+            if (response.success) {
+                this.iradministracion();
+                alert(response.message);
+            } else {
+                alert('Error: ' + response.message);
+                // Puedes agregar más lógica según sea necesario, como mostrar un mensaje de error en el formulario.
+            }
+        },
+        (error) => {
+            console.error('Error en la autenticación:', error);
+            alert('Error: Credenciales incorrectas');
+            this.router.navigate(['/login']);
         }
-        
-       
-      },
-      (error) => {
-        console.error('Error en la autenticación:', error);
-        alert('Error: Credenciales incorrectas');
-        
-          this.router.navigate(['/login']);
-      }
     );
-  }
+}
 
   iradministracion() {
     this.router.navigate(['/vestido']);

@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: '', component: VistaPrincipalComponent,},
   {path: 'loguin', component: LoginComponent},
   { path: 'vestido', component: VestidoComponent }
+  
  // { path: 'administrar-vestidos', component: VestidoComponent },
   // Otras rutas pueden ir aquí
 ];
