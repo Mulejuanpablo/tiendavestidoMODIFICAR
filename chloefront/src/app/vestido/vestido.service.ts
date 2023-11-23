@@ -32,6 +32,13 @@ export class VestidoService {
     return this.http.get<Vestido[]>(`${this.apiServerUrl}/vestido/search?key=${key}`);
   }
 
+  // VestidoService
+
+public searchVestidosByTalle(talle: string): Observable<Vestido[]> {
+  return this.http.get<Vestido[]>(`${this.apiServerUrl}/vestido/searchByTalle?Talle=${talle}`);
+}
+
+
 }
 
 //Cada método utiliza el servicio HttpClient para realizar operaciones HTTP como GET, POST, PUT y DELETE en la API del servidor. Estos métodos devuelven Observables que pueden ser suscritos desde componentes Angular para manejar los resultados de las solicitudes HTTP.

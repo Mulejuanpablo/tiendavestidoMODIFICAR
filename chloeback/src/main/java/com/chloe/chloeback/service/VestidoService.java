@@ -64,4 +64,7 @@ public class VestidoService {
                 key, key);
 
     }
+    public List<Vestido> searchVestidosByTalle(String talle) {
+        return vestidoRepo.findByTalleContaining(talle);
+    }
 }

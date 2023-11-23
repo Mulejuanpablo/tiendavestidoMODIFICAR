@@ -17,4 +17,6 @@ public interface VestidoRepo extends JpaRepository<Vestido, Long> {
     List<Vestido> findByNombreContainingOrColorContainingOrTalleContainingOrDescripcionContaining(String nombre,
             String color, String talle, String descripcion);
 
+            List<Vestido> findByTalleContaining(String talle);
+
 }

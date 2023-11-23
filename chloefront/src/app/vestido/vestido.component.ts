@@ -21,11 +21,12 @@ declare global {
 export class VestidoComponent implements OnInit {
   public vestidos: Vestido[] = [];
   public vestidosList: Vestido[] = [];
-  public editVestido: Vestido = new Vestido();
+  public editVestido: Vestido = new Vestido;
   public deleteVestido: Vestido = new Vestido();
+  public imgScale: Boolean = true;
 
   //constructor(private router: Router) { }
-  constructor(private vestidoService: VestidoService) {}
+  constructor(private vestidoService: VestidoService) { }
 
   ngOnInit() {
     this.getVestidos();
@@ -34,8 +35,9 @@ export class VestidoComponent implements OnInit {
   public getVestidos(): void {
     this.vestidoService.getVestidos().subscribe(
       (response: Vestido[]) => {
-        this.vestidos = response;
-        this.vestidosList = response;//sacar el List??
+        // Ordena la lista por el campo 'codigo' antes de asignarla
+        this.vestidos = response.sort((a, b) => a.codigo.localeCompare(b.codigo));
+        this.vestidosList = this.vestidos; // Puedes mantener esto si deseas tener una copia sin ordenar
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -55,6 +57,7 @@ export class VestidoComponent implements OnInit {
         addForm.reset();
       }
     );
+    $('#addVestidoModal').modal('hide');
   }
 
   public onUpdateVestido(vestido: Vestido): void {
@@ -67,6 +70,7 @@ export class VestidoComponent implements OnInit {
         alert(error.message);
       }
     );
+    
   }
 
   public onDeleteVestido(vestidoId: number): void {
@@ -74,6 +78,7 @@ export class VestidoComponent implements OnInit {
       () => {
         console.log('Vestido eliminado con éxito.');
         this.getVestidos();
+        
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -96,7 +101,28 @@ export class VestidoComponent implements OnInit {
     }
   }
 
-  public onOpenVestidoModal(mode: string, vestido?: any): void {
+  public searchVestidosByTalle(talle: string): void {
+    if (talle) {
+      this.vestidoService.searchVestidosByTalle(talle).subscribe(
+        (results: Vestido[]) => {
+          this.vestidosList = results;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    } else {
+      this.getVestidos();
+    }
+  }
+
+  public onOpenVestidoModal(mode: string, vestido?: Vestido): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+
     if (mode === 'add') {
       // Limpiar los campos del formulario de agregar
       this.clearAddFormFields();
@@ -104,6 +130,7 @@ export class VestidoComponent implements OnInit {
 
     if (mode === 'edit' && vestido) {
       this.editVestido = vestido;
+      button.setAttribute('data-target', '#editVestidoModal');
     }
 
     if (mode === 'delete' && vestido) {
@@ -111,12 +138,27 @@ export class VestidoComponent implements OnInit {
     }
 
     const modalId = `#${mode}VestidoModal`;
-
     $(modalId).modal('show');
+
+    // $(modalId).modal('show');
+    container!.appendChild(button);
+    button.click();
   }
 
   private clearAddFormFields(): void {
     // Limpia los campos del formulario de agregar
     // Puedes agregar la lógica para limpiar los campos de tu formulario aquí
+  }
+  public enlargeImg() {
+    const img = document.getElementById("img1");
+    if (this.imgScale) {
+      img!.style.transform = "scale(1.5)";
+      this.imgScale = !this.imgScale;
+    } else {
+      img!.style.transform = "scale(1)";
+      this.imgScale = !this.imgScale;
+    }
+    // Animation effect
+    img!.style.transition = "transform 0.25s ease";
   }
 }

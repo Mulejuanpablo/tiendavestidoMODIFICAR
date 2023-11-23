@@ -53,6 +53,7 @@ public onAddPrecio(addForm: NgForm): void {
   } else {
     console.error("El elemento 'add-precio-form' no se encontró en el documento.");
   }
+  $('#updateVestidoModal').modal('hide');
 }
 
 
@@ -66,6 +67,7 @@ public onAddPrecio(addForm: NgForm): void {
         alert(error.message);
       }
     );
+    $('#updateVestidoModal').modal('hide');
   }
 
   public onDeletePrecio(precioId: number): void { // Cambio de "onDeleteVestido" a "onDeletePrecio"
@@ -78,6 +80,7 @@ public onAddPrecio(addForm: NgForm): void {
         alert(error.message);
       }
     );
+    $('#updateVestidoModal').modal('hide');
   }
 
   public searchPrecios(key: string): void { // Cambio de "searchVestidos" a "searchPrecios"

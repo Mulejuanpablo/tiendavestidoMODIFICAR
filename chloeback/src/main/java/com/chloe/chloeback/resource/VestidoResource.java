@@ -67,6 +67,12 @@ public class VestidoResource {
         return new ResponseEntity<>(vestidos, HttpStatus.OK);
     }
 
+    @GetMapping("/searchByTalle")
+public ResponseEntity<List<Vestido>> searchVestidosByTalle(@RequestParam("talle") String talle) {
+    List<Vestido> vestidos = vestidoService.searchVestidosByTalle(talle);
+    return new ResponseEntity<>(vestidos, HttpStatus.OK);
+}
+
     @PostMapping("/upload")
     @ResponseBody
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {// El método

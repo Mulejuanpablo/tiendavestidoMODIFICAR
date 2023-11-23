@@ -17,17 +17,21 @@
             <input type="search" (ngModelChange)="searchVestidos(key.value)" #key="ngModel" ngModel name="key"
                 id="searchName" class="form-control mr-sm-2" placeholder="Buscar Vestidos..." required>
         </form>
+      <!--   <form class="form-inline my-2 my-lg-0">
+            <input type="search" (ngModelChange)="searchVestidosByTalle(talle.value)" #talle="ngModel" ngModel name="talle"
+            id="searchTalle" class="form-control mr-sm-2" placeholder="Buscar por Talle...">
+        </form> -->
     </div>
 </nav>
 
 <!-- Contenedor Principal -->
 <div class="container" id="main-container">
     <div class="row">
-        <div *ngFor="let vestido of vestidosList" class="col-md-6 col-xl-3">
+        <div *ngFor="let vestido of vestidosList " class="col-md-6 col-xl-3">
             <div class="card m-b-30">
                 <div class="card-body row">
                     <div class="col-6">
-                        <a href=""><img [src]="vestido?.foto" alt="" class="img-fluid rounded-circle w-60"></a>
+                        <img [src]="vestido?.foto" alt="" (click)="enlargeImg()" id="img1" class="img-fluid rounded-circle w-60">
                     </div>
                     <div class="col-6 card-title align-self-center mb-0">
                         <h5>{{vestido?.nombre}}</h5>
@@ -45,8 +49,8 @@
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
-                        <a (click)="onOpenVestidoModal('update', vestido)" class="btn btn-primary tooltips"
-                            data-placement="top" data-original-title="Editar"><i class="fa fa-pencil"></i> Editar </a>
+                        <a (click)="onOpenVestidoModal('edit', vestido)" class="btn btn-primary tooltips"
+                            data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> Editar </a>
                         <a (click)="onOpenVestidoModal('delete', vestido)" class="btn btn-secondary tooltips"
                             data-placement="top" data-original-title="Borrar"><i class="fa fa-times"></i> Borrar </a>
                     </div>
@@ -62,7 +66,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addVestidoModalLabel">Nuevo Vestido</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -116,7 +120,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="add-vestido-form" class="btn btn-secondary"
-                                data-dismiss="modal">Cerrar</button>
+                                data-bs-dismiss="modal">Cerrar</button>
                             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar
                                 Cambios</button>
                         </div>
@@ -128,14 +132,14 @@
 
 
     <!-- Modal Editar Vestido -->
-    <div class="modal fade" id="updateVestidoModal" tabindex="-1" role="dialog"
-        aria-labelledby="updateVestidoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editVestidoModal" tabindex="-1" role="dialog"
+        aria-labelledby="vestidoEditModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateVestidoModalLabel">Editar Vestido {{ editVestido ?
+                    <h5 class="modal-title" id="editVestidoModalLabel">Editar Vestido {{ editVestido ?
                         editVestido.nombre : 'Nombre no disponible' }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -143,34 +147,53 @@
                     <form #editForm="ngForm">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" ngModel name="nombre" class="form-control" id="nombre"
-                                placeholder="Nombre" value="{{ editVestido ? editVestido.nombre : '' }}">
+                            <input type="text" ngModel="{{ editVestido ? editVestido.nombre : '' }}" name="nombre" class="form-control" id="nombre"
+                                placeholder="Nombre">
                         </div>
-                        <input type="hidden" ngModel name="id" class="form-control" id="id" placeholder="Id">
+                        <input type="hidden" ngModel="{{ editVestido ? editVestido.id : '' }}" name="id" class="form-control" id="id" placeholder="Id">
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
-                            <input type="text" ngModel name="descripcion" class="form-control" id="descripcion"
-                                placeholder="Descripción" value="{{ editVestido ? editVestido.descripcion : '' }}">
+                            <input type="text" ngModel="{{ editVestido ? editVestido.descripcion : '' }}" name="descripcion" class="form-control" id="descripcion"
+                                placeholder="Descripción" >
                         </div>
                         <div class="form-group">
-                            <label for="codigo">Categoría</label>
-                            <input type="text" ngModel name="codigo" class="form-control" id="codigo"
-                                placeholder="Categoría" value="{{ editVestido ? editVestido.codigo : '' }}">
+                            <label for="codigo">Codigo</label>
+                            <input type="text" ngModel="{{editVestido.codigo}}" name="codigo" class="form-control" id="codigo"
+                                placeholder="Codigo">
+                        </div>
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" ngModel="{{ editVestido ? editVestido.color : '' }}" name="color" class="form-control" id="color"
+                                placeholder="Color">
+                        </div>
+                        <div class="form-group">
+                            <label for="talle">Talle</label>
+                            <input type="text" ngModel="{{ editVestido ? editVestido.talle : '' }}" name="talle" class="form-control" id="talle"
+                                placeholder="Talle">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Unidadas</label>
+                            <input type="text" ngModel="{{ editVestido ? editVestido.unidades : '' }}" name="unidades" class="form-control" id="unidades"
+                                placeholder="Unidades">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Fecha Compra</label>
+                            <input type="text" ngModel="{{ editVestido ? editVestido.fechacompra : '' }}" name="fechacompra" class="form-control" id="fechacompra"
+                                placeholder="Fecha Compra">
                         </div>
                         <div class="form-group">
                             <label for="precio_id">Precio</label>
-
-                            <input type="number" ngModel name="precio_id" class="form-control" id="precio_id"
-                                placeholder="Precio" value="{{ editVestido ? editVestido.precio_id : '' }}">
+                            <input type="number" ngModel="{{editVestido.precio_id}}" name="precio_id" class="form-control" id="precio_id"
+                                placeholder="Precio">
                         </div>
                         <div class="form-group">
                             <label for="foto">URL de Imagen</label>
-                            <input type="text" ngModel name="foto" class="form-control" id="foto"
-                                placeholder="URL de Imagen" value="{{ editVestido ? editVestido.foto : '' }}">
+                            <input type="text" ngModel="{{ editVestido ? editVestido.foto : '' }}" name="foto" class="form-control" id="foto"
+                                placeholder="URL de Imagen">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                            <button (click)="onUpdateVestido(editForm.value)" data-dismiss="modal"
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+                            <button (click)="onUpdateVestido(editForm.value)" data-bs-dismiss="modal"
                                 class="btn btn-primary">Guardar Cambios</button>
                         </div>
                     </form>
@@ -186,16 +209,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteVestidoModalLabel">Borrar Vestido</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <p>¿Está seguro de borrar el vestido {{deleteVestido.nombre}}?</p>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                         <button *ngIf="deleteVestido.id !== undefined" (click)="onDeleteVestido(deleteVestido.id)"
-                            class="btn btn-danger" data-dismiss="modal">Sí</button>
+                            class="btn btn-danger" data-bs-dismiss="modal">Sí</button>
                     </div>
                 </div>
             </div>
