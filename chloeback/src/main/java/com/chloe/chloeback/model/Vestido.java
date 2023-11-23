@@ -19,7 +19,7 @@ public class Vestido implements Serializable {
                                                  // columna en la base de datos, como si puede ser nula o si se puede
                                                  // actualizar.
     private Long id;
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private String codigo;
     private String nombre;
     private String color;

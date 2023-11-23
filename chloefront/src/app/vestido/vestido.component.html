@@ -14,13 +14,14 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
+            <div></div>
             <input type="search" (ngModelChange)="searchVestidos(key.value)" #key="ngModel" ngModel name="key"
                 id="searchName" class="form-control mr-sm-2" placeholder="Buscar Vestidos..." required>
         </form>
-      <!--   <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0">
             <input type="search" (ngModelChange)="searchVestidosByTalle(talle.value)" #talle="ngModel" ngModel name="talle"
             id="searchTalle" class="form-control mr-sm-2" placeholder="Buscar por Talle...">
-        </form> -->
+        </form> 
     </div>
 </nav>
 
@@ -31,7 +32,7 @@
             <div class="card m-b-30">
                 <div class="card-body row">
                     <div class="col-6">
-                        <img [src]="vestido?.foto" alt="" (click)="enlargeImg()" id="img1" class="img-fluid rounded-circle w-60">
+                        <img [src]="vestido?.foto" alt="" (click)="enlargeImg(vestido.codigo)" id="img1{{vestido.codigo}}" class="img-fluid rounded-circle w-60">
                     </div>
                     <div class="col-6 card-title align-self-center mb-0">
                         <h5>{{vestido?.nombre}}</h5>

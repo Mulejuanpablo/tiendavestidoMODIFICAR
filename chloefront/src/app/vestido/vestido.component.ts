@@ -100,7 +100,7 @@ export class VestidoComponent implements OnInit {
       this.getVestidos();
     }
   }
-
+ 
   public searchVestidosByTalle(talle: string): void {
     if (talle) {
       this.vestidoService.searchVestidosByTalle(talle).subscribe(
@@ -149,8 +149,8 @@ export class VestidoComponent implements OnInit {
     // Limpia los campos del formulario de agregar
     // Puedes agregar la lógica para limpiar los campos de tu formulario aquí
   }
-  public enlargeImg() {
-    const img = document.getElementById("img1");
+  public enlargeImg(codigo:string) {
+    const img = document.getElementById("img1"+codigo);
     if (this.imgScale) {
       img!.style.transform = "scale(1.5)";
       this.imgScale = !this.imgScale;

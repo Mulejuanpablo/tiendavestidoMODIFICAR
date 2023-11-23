@@ -35,7 +35,7 @@ export class VestidoService {
   // VestidoService
 
 public searchVestidosByTalle(talle: string): Observable<Vestido[]> {
-  return this.http.get<Vestido[]>(`${this.apiServerUrl}/vestido/searchByTalle?Talle=${talle}`);
+  return this.http.get<Vestido[]>(`${this.apiServerUrl}/vestido/searchByTalle?talle=${talle}`);
 }
 
 
